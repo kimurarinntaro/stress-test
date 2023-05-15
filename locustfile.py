@@ -9,9 +9,10 @@ class UserBehavior(TaskSet):
     def on_start(self):
         self.test_file = itertools.cycle(["/Users/rintarokimura/Desktop/neko.xlsx"])
 
-    @task(1)
-    def get(self):
-        self.client.get("/boards/KT662", verify=False)
+    # @task(1)
+    # def get(self):
+    #     response = self.client.get("/boards/KT662/", verify=False)
+    #     print(response.status_code)
 
     @task(1)
     def post_file(self):
@@ -22,6 +23,14 @@ class UserBehavior(TaskSet):
             files = {"file": f}
             response = self.client.post(url, files=files)
             print(response.status_code)
+
+    # @task(1)
+    # def patch_file_member(self):
+    #     url = "/api/kumi/KT662/files/bcd197a5-fd06-4fa0-b203-aac1d01dd23b/member/e85c0cd3-5444-4487-a1b1-8e75672edc58"
+    #     headers = {"Content-Type": "application/json"}
+    #     response = self.client.patch(url, headers=headers)
+    #     print(response.status_code)
+
 
 class WebsiteUser(HttpUser):
     wait_time = constant(0)
